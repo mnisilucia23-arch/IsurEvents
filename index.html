@@ -1,4 +1,18 @@
-.portfolio-item {
+<!-- THE CSS STYLES (Make sure this is inside your <head> or combined with your main styles) -->
+<style>
+  .portfolio {
+    padding: 120px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+
+  .portfolio-item {
     position: relative;
     background-color: #111; /* Fallback color if image is missing */
     background-size: cover;
@@ -18,7 +32,7 @@
   /* Subtle lift effect on hover */
   .portfolio-item:hover {
     transform: translateY(-4px);
-    border-color: var(--cobalt);
+    border-color: var(--cobalt, #1A6EFF);
   }
 
   /* This adds a slick dark gradient mask over your photos so the white text pops */
@@ -35,3 +49,58 @@
   .portfolio-item:hover::before {
     background: linear-gradient(to top, rgba(10,10,10,0.95) 20%, rgba(10,10,10,0.2) 70%, transparent 100%);
   }
+
+  .portfolio-item-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .portfolio-tag {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold, #C8A96E);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+
+  .portfolio-title {
+    font-family: var(--bebas, sans-serif);
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: var(--white, #F0EDE8);
+  }
+</style>
+
+<!-- THE HTML STRUCTURE -->
+<section class="portfolio" id="portfolio">
+  <div class="section-label reveal">Portfolio Showcase</div>
+  <h2 class="section-title reveal">Recent Productions</h2>
+  <div class="portfolio-grid reveal">
+    
+    <!-- Project 1 (Now using your provided image link) -->
+    <div class="portfolio-item" style="background-image: url('597433994_1494112869128458_5834637705139913040_n.jpg');">
+      <div class="portfolio-item-content">
+        <div class="portfolio-tag">Concerts & Live Music</div>
+        <div class="portfolio-title">Gospel Praise Concert Production</div>
+      </div>
+    </div>
+    
+    <!-- Project 2 -->
+    <div class="portfolio-item" style="background-image: url('images/gala.jpg');">
+      <div class="portfolio-item-content">
+        <div class="portfolio-tag">Corporate Functions</div>
+        <div class="portfolio-title">Year-End Awards Gala Dinner</div>
+      </div>
+    </div>
+    
+    <!-- Project 3 -->
+    <div class="portfolio-item" style="background-image: url('images/launch.jpg');">
+      <div class="portfolio-item-content">
+        <div class="portfolio-tag">Experiential Marketing</div>
+        <div class="portfolio-title">Product Launch & Stage Build</div>
+      </div>
+    </div>
+
+  </div>
+</section>
