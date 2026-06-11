@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ISUREvents & Projects — We Produce Exorbitant Events</title>
+<title>ISUREvents & Projects — We Produce Extraordinary Events</title>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -53,7 +53,7 @@
     text-decoration: none;
   }
   .nav-logo span { color: var(--cobalt); }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links { display: flex; gap: 36px; list-style: none; align-items: center; }
   .nav-links a {
     color: var(--muted);
     text-decoration: none;
@@ -168,6 +168,8 @@
     margin-bottom: 40px;
   }
   .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  /* BUTTONS */
   .btn-primary {
     background: var(--cobalt);
     color: var(--white);
@@ -288,6 +290,51 @@
     font-weight: 300;
   }
 
+  /* NEW: GEAR & SPECS SECTION */
+  .gear-specs {
+    padding: 120px 48px;
+    background: #0e0e0e;
+  }
+  .gear-container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .gear-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 48px;
+  }
+  .gear-category {
+    background: var(--dark);
+    border: 1px solid #1a1a1a;
+    padding: 32px;
+    border-radius: 2px;
+  }
+  .gear-category h3 {
+    font-family: var(--bebas);
+    font-size: 24px;
+    letter-spacing: 1px;
+    color: var(--gold);
+    margin-bottom: 20px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 10px;
+  }
+  .gear-list {
+    list-style: none;
+  }
+  .gear-list li {
+    font-size: 14px;
+    color: rgba(240,237,232,0.7);
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+  }
+  .gear-list li span {
+    color: var(--white);
+    font-weight: 500;
+  }
+
   /* ABOUT */
   .about {
     padding: 120px 48px;
@@ -351,6 +398,56 @@
   }
   .about-text p strong { color: var(--white); font-weight: 500; }
 
+  /* NEW: WORK / PORTFOLIO GALLERY */
+  .portfolio {
+    padding: 120px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .portfolio-item {
+    position: relative;
+    background: #111;
+    height: 280px;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid #1a1a1a;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 30px;
+  }
+  /* Decorative abstract background gradient blocks in place of missing images */
+  .portfolio-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 20%, rgba(26,110,255,0.15) 100%);
+    z-index: 1;
+  }
+  .portfolio-item-content {
+    position: relative;
+    z-index: 2;
+  }
+  .portfolio-tag {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 600;
+  }
+  .portfolio-title {
+    font-family: var(--bebas);
+    font-size: 28px;
+    letter-spacing: 1px;
+    color: var(--white);
+  }
+
   /* PROCESS */
   .process {
     padding: 120px 48px;
@@ -402,6 +499,52 @@
     font-size: 13px;
     color: var(--muted);
     line-height: 1.7;
+  }
+
+  /* NEW: FAQ SECTION */
+  .faq {
+    padding: 120px 48px;
+    background: var(--mid);
+  }
+  .faq-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border-bottom: 1px solid #2a2a2a;
+    padding: 24px 0;
+  }
+  .faq-question {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+  }
+  .faq-question::after {
+    content: '+';
+    font-size: 20px;
+    color: var(--cobalt);
+    transition: transform 0.3s;
+  }
+  .faq-item.active .faq-question::after {
+    transform: rotate(45deg);
+    color: var(--gold);
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, margin 0.3s;
+    color: rgba(240,237,232,0.6);
+    font-size: 14px;
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .faq-item.active .faq-answer {
+    margin-top: 14px;
   }
 
   /* CTA BAND */
@@ -587,11 +730,21 @@
 
   @media (max-width: 768px) {
     nav { padding: 18px 24px; }
-    .nav-links { display: none; }
-    .nav-cta { display: none; }
+    .nav-links { 
+      display: none; 
+      flex-direction: column;
+      position: absolute;
+      top: 100%; left: 0; right: 0;
+      background: rgba(10,10,10,0.98);
+      padding: 24px;
+      gap: 20px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .nav-links.active { display: flex; }
     .nav-hamburger { display: flex; }
     .hero-content { padding: 0 24px 60px; }
     .services { padding: 80px 24px; }
+    .gear-grid { grid-template-columns: 1fr; gap: 20px; }
     .about { padding: 80px 24px; }
     .about-inner { grid-template-columns: 1fr; gap: 48px; }
     .process { padding: 80px 24px; }
@@ -610,13 +763,14 @@
 
 <nav id="navbar">
   <a href="#" class="nav-logo">ISUR<span>Events</span></a>
-  <ul class="nav-links">
+  <ul class="nav-links" id="nav-links">
     <li><a href="#services">Services</a></li>
+    <li><a href="#gear">Inventory</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="#process">Process</a></li>
+    <li><a href="#portfolio">Projects</a></li>
     <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
   </ul>
-  <button class="nav-hamburger" aria-label="Menu">
+  <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
@@ -631,10 +785,10 @@
     <div class="hero-eyebrow">Events Production Company · South Africa</div>
     <h1 class="hero-headline">
       <span class="line-dim">WE PRODUCE</span><br>
-      <span>EXORBITANT</span><br>
+      <span>EXTRAORDINARY</span><br>
       <span class="line-gold">EVENTS</span>
     </h1>
-    <p class="hero-sub">World-class sound, stage, and lighting for every occasion — from intimate gatherings to large-scale productions.</p>
+    <p class="hero-sub">World-class sound, stage, and lighting for every occasion — from intimate gatherings to large-scale live concert productions.</p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Book Your Event</a>
       <a href="#services" class="btn-outline">Our Services</a>
@@ -664,7 +818,7 @@
   <h2 class="section-title reveal">Our Services</h2>
   <div class="services-grid reveal">
     <div class="service-card">
-      <span class="service-icon">🎤</span>
+      <span class="service-icon">🎉</span>
       <div class="service-name">Events</div>
       <p class="service-desc">Full-scale event production from concept to execution. Corporate launches, awards ceremonies, concerts, and beyond.</p>
     </div>
@@ -674,7 +828,7 @@
       <p class="service-desc">Crystal-clear audio engineering and premium sound systems. We ensure every word and note lands with impact.</p>
     </div>
     <div class="service-card">
-      <span class="service-icon">🎭</span>
+      <span class="service-icon">🎪</span>
       <div class="service-name">Stage</div>
       <p class="service-desc">Custom stage design and construction. From intimate platforms to main-stage builds that command attention.</p>
     </div>
@@ -686,13 +840,40 @@
   </div>
 </section>
 
+<section class="gear-specs" id="gear">
+  <div class="gear-container">
+    <div class="section-label reveal">Premium Assets</div>
+    <h2 class="section-title reveal">Our Rig & Technology</h2>
+    <div class="gear-grid reveal">
+      <div class="gear-category">
+        <h3>Acoustics & Audio Engineering</h3>
+        <ul class="gear-list">
+          <li>Pro-grade Line Arrays <span>High-Output Modules</span></li>
+          <li>Subwoofers <span>High-Impact Low Frequency</span></li>
+          <li>Digital Consoles <span>Wireless Sound Architect Control</span></li>
+          <li>Microphones <span>UHF Wireless System Systems</span></li>
+        </ul>
+      </div>
+      <div class="gear-category">
+        <h3>Visuals & Atmospheric Lighting</h3>
+        <ul class="gear-list">
+          <li>Intelligent Luminaires <span>Moving Heads & Washes</span></li>
+          <li>Structure Support <span>Heavy Duty Aluminum Trussing</span></li>
+          <li>Visual Displays <span>High-Definition LED Screen Panels</span></li>
+          <li>Effects <span>DMX Hazers & Fog Systems</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="about" id="about">
   <div class="about-inner">
     <div class="about-text reveal">
       <div class="section-label">Who We Are</div>
       <h2 class="section-title" style="margin-bottom: 32px;">Built for the Stage</h2>
-      <p>ISUREvents & Projects is a South African events production company dedicated to delivering <strong>exorbitant quality</strong> at every scale. We bring together expert technicians, creative directors, and production specialists to make your vision a reality.</p>
-      <p>Whether you need a full-scale corporate event, a gospel concert, a community function, or a product launch — our team brings the expertise, equipment, and passion to make it unforgettable.</p>
+      <p>ISUREvents & Projects is a South African events production company dedicated to delivering <strong>exceptional quality</strong> at every scale. We bring together expert technicians, creative directors, and production specialists to make your vision a reality.</p>
+      <p>Whether you need a full-scale corporate event, a live gospel concert, a community function, or a product launch — our team brings the expertise, equipment, and passion to make it unforgettable.</p>
       <div style="margin-top: 36px;">
         <a href="#contact" class="btn-primary">Work With Us</a>
       </div>
@@ -704,15 +885,40 @@
       </div>
       <div class="stat-box">
         <div class="stat-number">100+</div>
-        <div class="stat-label">Events</div>
+        <div class="stat-label">Events Managed</div>
       </div>
       <div class="stat-box">
         <div class="stat-number">4</div>
-        <div class="stat-label">Core Services</div>
+        <div class="stat-label">Core Verticals</div>
       </div>
       <div class="stat-box">
         <div class="stat-number">ZA</div>
         <div class="stat-label">Based Locally</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="portfolio" id="portfolio">
+  <div class="section-label reveal">Portfolio Showcase</div>
+  <h2 class="section-title reveal">Recent Productions</h2>
+  <div class="portfolio-grid reveal">
+    <div class="portfolio-item">
+      <div class="portfolio-item-content">
+        <div class="portfolio-tag">Concerts & Live Music</div>
+        <div class="portfolio-title">Gospel Praise Concert Production</div>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-item-content">
+        <div class="portfolio-tag">Corporate Functions</div>
+        <div class="portfolio-title">Year-End Awards Gala Dinner</div>
+      </div>
+    </div>
+    <div class="portfolio-item">
+      <div class="portfolio-item-content">
+        <div class="portfolio-tag">Experiential Marketing</div>
+        <div class="portfolio-title">Product Launch & Stage Build</div>
       </div>
     </div>
   </div>
@@ -749,6 +955,27 @@
   </div>
 </section>
 
+<section class="faq">
+  <div class="faq-container">
+    <div class="section-label reveal" style="text-align: center;">FAQ</div>
+    <h2 class="section-title reveal" style="text-align: center; margin-bottom: 48px;">Answering Your Questions</h2>
+    <div class="reveal">
+      <div class="faq-item">
+        <div class="faq-question">Do you offer production services outside your main region?</div>
+        <div class="faq-answer">Yes, we serve across various regions in South Africa. Depending on the size of the production setup, logistics and transport fees are adjusted realistically within our initial budget quotation.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Can you provide backup power systems for events?</div>
+        <div class="faq-answer">Absolutely. We understand the power dependencies of sound and stage lighting setups. We can arrange certified event generators to ensure total production continuity during load shedding or site power drops.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">How early do we need to secure a booking date?</div>
+        <div class="faq-answer">We advise reserving large scale production requirements at least 4 to 8 weeks in advance to properly plan equipment asset distribution and technical floor plans.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <div class="cta-band">
   <h2>READY TO PRODUCE SOMETHING EXTRAORDINARY?</h2>
   <p>Let's talk about your next event. No project is too big or too small.</p>
@@ -768,7 +995,7 @@
         </div>
       </div>
       <div class="contact-info-item">
-        <div class="contact-icon">📧</div>
+        <div class="contact-icon">✉️</div>
         <div class="contact-detail">
           <strong>Email</strong>
           <span>isurevents@gmail.com</span>
@@ -782,7 +1009,7 @@
         </div>
       </div>
       <div class="contact-info-item">
-        <div class="contact-icon">📘</div>
+        <div class="contact-icon">👍</div>
         <div class="contact-detail">
           <strong>Facebook</strong>
           <span>@ISUREvents</span>
@@ -804,7 +1031,7 @@
 
 <footer>
   <div class="footer-logo">ISUR<span>Events</span></div>
-  <div class="footer-copy">© 2026 ISUREvents & Projects · We Produce Exorbitant and Quality Projects</div>
+  <div class="footer-copy">© 2026 ISUREvents & Projects · We Produce Premium Quality Events</div>
   <div class="footer-social">
     <a href="#" class="social-link" aria-label="Facebook">f</a>
     <a href="#" class="social-link" aria-label="Instagram">ig</a>
@@ -828,6 +1055,35 @@
     });
   }, { threshold: 0.15 });
   reveals.forEach(el => observer.observe(el));
+
+  // Hamburger Menu Logic
+  const hamburger = document.getElementById('nav-hamburger');
+  const navLinks = document.getElementById('nav-links');
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
+
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      navLinks.classList.remove('active');
+    });
+  });
+
+  // Accordion Logic
+  document.querySelectorAll('.faq-question').forEach(button => {
+    button.addEventListener('click', () => {
+      const faqItem = button.parentElement;
+      const answer = faqItem.querySelector('.faq-answer');
+      
+      faqItem.classList.toggle('active');
+      
+      if (faqItem.classList.contains('active')) {
+        answer.style.maxHeight = answer.scrollHeight + "px";
+      } else {
+        answer.style.maxHeight = 0;
+      }
+    });
+  });
 
   document.querySelector('.form-submit').addEventListener('click', function() {
     this.textContent = '✓ Message Sent!';
