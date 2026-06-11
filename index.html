@@ -37,23 +37,36 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 20px 48px;
+    padding: 15px 48px;
     background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
-    transition: background 0.3s;
+    transition: background 0.3s, padding 0.3s;
   }
   nav.scrolled {
     background: rgba(10,10,10,0.97);
     border-bottom: 1px solid #1a1a1a;
+    padding: 10px 48px;
+  }
+  .nav-logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+  }
+  .nav-logo-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 4px;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.1);
   }
   .nav-logo {
     font-family: var(--bebas);
     font-size: 28px;
     letter-spacing: 2px;
     color: var(--white);
-    text-decoration: none;
   }
   .nav-logo span { color: var(--cobalt); }
-  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links { display: flex; align-items: center; gap: 36px; list-style: none; }
   .nav-links a {
     color: var(--muted);
     text-decoration: none;
@@ -70,6 +83,7 @@
     padding: 10px 22px;
     border-radius: 2px;
     font-weight: 600 !important;
+    transition: background 0.2s !important;
   }
   .nav-cta:hover { background: #0f5ae0; color: var(--white) !important; }
 
@@ -77,33 +91,26 @@
   .hero {
     position: relative;
     height: 100vh;
-    min-height: 600px;
+    min-height: 650px;
     display: flex;
     align-items: flex-end;
     overflow: hidden;
+  }
+  .hero-img-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
   }
   .hero-bg {
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(26,110,255,0.18) 0%, transparent 70%),
-      radial-gradient(ellipse 30% 40% at 30% 60%, rgba(200,169,110,0.08) 0%, transparent 60%),
-      linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.7) 60%, rgba(10,10,10,0.97) 100%);
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(26,110,255,0.2) 0%, transparent 70%),
+      linear-gradient(180deg, rgba(10,10,10,0.4) 0%, rgba(10,10,10,0.7) 50%, rgba(10,10,10,0.98) 100%);
     z-index: 1;
-  }
-  .hero-stage {
-    position: absolute;
-    inset: 0;
-    background:
-      repeating-linear-gradient(
-        90deg,
-        transparent 0px,
-        transparent 180px,
-        rgba(26,110,255,0.03) 180px,
-        rgba(26,110,255,0.03) 181px
-      ),
-      linear-gradient(180deg, #0d0d14 0%, #0a0a12 100%);
-    z-index: 0;
   }
   .beam {
     position: absolute;
@@ -111,16 +118,16 @@
     width: 3px;
     height: 75%;
     transform-origin: bottom center;
-    z-index: 0;
-    opacity: 0.15;
+    z-index: 1;
+    opacity: 0.2;
     animation: sweep 8s ease-in-out infinite;
   }
   .beam-1 { left: 20%; background: linear-gradient(to top, var(--cobalt), transparent); animation-delay: 0s; transform: rotate(-25deg); }
-  .beam-2 { left: 50%; background: linear-gradient(to top, var(--gold), transparent); animation-delay: 2s; transform: rotate(0deg); opacity: 0.1; }
+  .beam-2 { left: 50%; background: linear-gradient(to top, var(--gold), transparent); animation-delay: 2s; transform: rotate(0deg); opacity: 0.15; }
   .beam-3 { left: 80%; background: linear-gradient(to top, var(--cobalt), transparent); animation-delay: 4s; transform: rotate(20deg); }
   @keyframes sweep {
-    0%, 100% { opacity: 0.12; transform: rotate(var(--r, -25deg)); }
-    50% { opacity: 0.22; transform: rotate(calc(var(--r, -25deg) + 10deg)); }
+    0%, 100% { opacity: 0.15; transform: rotate(var(--r, -25deg)); }
+    50% { opacity: 0.3; transform: rotate(calc(var(--r, -25deg) + 10deg)); }
   }
   .beam-1 { --r: -25deg; }
   .beam-3 { --r: 20deg; }
@@ -157,20 +164,20 @@
     margin-bottom: 28px;
   }
   .hero-headline .line-gold { color: var(--gold); }
-  .hero-headline .line-dim { color: rgba(240,237,232,0.35); }
-  .hero-sub {
-    font-size: 15px;
-    color: rgba(240,237,232,0.55);
+  .hero-headline .line-dim { color: rgba(240,237,232,0.4); }
+  .hero-sub p {
+    font-size: 16px;
+    color: rgba(240,237,232,0.7);
     font-weight: 300;
     letter-spacing: 0.5px;
-    max-width: 480px;
+    max-width: 520px;
     line-height: 1.7;
     margin-bottom: 40px;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
   }
   .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
-  .btn-primary {
-    background: var(--cobalt);
-    color: var(--white);
+
+  .btn-primary, .btn-outline {
     padding: 14px 32px;
     font-size: 13px;
     font-weight: 600;
@@ -178,45 +185,35 @@
     text-transform: uppercase;
     text-decoration: none;
     border-radius: 2px;
-    transition: background 0.2s, transform 0.1s;
+    transition: background 0.2s, transform 0.2s, border-color 0.2s;
     display: inline-block;
   }
-  .btn-primary:hover { background: #0f5ae0; transform: translateY(-1px); }
-  .btn-outline {
-    border: 1px solid rgba(240,237,232,0.2);
-    color: var(--white);
-    padding: 14px 32px;
-    font-size: 13px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    text-decoration: none;
-    border-radius: 2px;
-    transition: border-color 0.2s, background 0.2s;
-    display: inline-block;
-  }
-  .btn-outline:hover { border-color: var(--white); background: rgba(240,237,232,0.05); }
+  .btn-primary { background: var(--cobalt); color: var(--white); }
+  .btn-primary:hover { background: #0f5ae0; transform: translateY(-2px); }
+  .btn-outline { border: 1px solid rgba(240,237,232,0.3); color: var(--white); }
+  .btn-outline:hover { border-color: var(--white); background: rgba(240,237,232,0.08); transform: translateY(-2px); }
 
   /* TICKER */
   .ticker {
     background: var(--cobalt);
-    padding: 12px 0;
+    padding: 14px 0;
     overflow: hidden;
     white-space: nowrap;
+    position: relative;
+    z-index: 2;
   }
   .ticker-inner {
     display: inline-flex;
-    animation: ticker 20s linear infinite;
-    gap: 0;
+    animation: ticker 25s linear infinite;
   }
   .ticker-item {
     font-family: var(--bebas);
-    font-size: 16px;
+    font-size: 18px;
     letter-spacing: 3px;
     padding: 0 48px;
-    color: rgba(255,255,255,0.9);
+    color: rgba(255,255,255,0.95);
   }
-  .ticker-item::after { content: '✦'; margin-left: 48px; opacity: 0.5; }
+  .ticker-item::after { content: '✦'; margin-left: 48px; opacity: 0.6; }
   @keyframes ticker {
     0% { transform: translateX(0); }
     100% { transform: translateX(-50%); }
@@ -245,41 +242,55 @@
   }
   .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1px;
-    background: #1a1a1a;
-    border: 1px solid #1a1a1a;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
   }
   .service-card {
     background: var(--dark);
-    padding: 48px 36px;
-    position: relative;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
     overflow: hidden;
-    transition: background 0.3s;
+    transition: transform 0.3s, border-color 0.3s;
+    display: flex;
+    flex-direction: column;
   }
-  .service-card:hover { background: #141414; }
-  .service-card::before {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 2px;
-    background: var(--cobalt);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s;
+  .service-card:hover { 
+    transform: translateY(-6px); 
+    border-color: rgba(26,110,255,0.4);
   }
-  .service-card:hover::before { transform: scaleX(1); }
-  .service-icon {
-    font-size: 32px;
-    margin-bottom: 24px;
-    display: block;
+  .service-img-wrapper {
+    position: relative;
+    height: 200px;
+    width: 100%;
+    overflow: hidden;
+    background: var(--mid);
+  }
+  .service-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s;
+  }
+  .service-card:hover .service-img {
+    transform: scale(1.05);
+  }
+  .service-body {
+    padding: 32px 28px;
+    flex-grow: 1;
   }
   .service-name {
     font-family: var(--bebas);
-    font-size: 32px;
+    font-size: 28px;
     letter-spacing: 1px;
     margin-bottom: 12px;
     color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .service-name span {
+    color: var(--cobalt);
+    font-size: 20px;
   }
   .service-desc {
     font-size: 14px;
@@ -295,26 +306,41 @@
     position: relative;
     overflow: hidden;
   }
-  .about::before {
-    content: 'ISUR';
-    position: absolute;
-    right: -40px;
-    top: 50%;
-    transform: translateY(-50%);
-    font-family: var(--bebas);
-    font-size: 280px;
-    color: rgba(26,110,255,0.04);
-    letter-spacing: -10px;
-    pointer-events: none;
-    user-select: none;
-  }
   .about-inner {
     max-width: 1200px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 64px;
     align-items: center;
+  }
+  .about-text p {
+    font-size: 15px;
+    color: rgba(240,237,232,0.7);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .about-text p strong { color: var(--white); font-weight: 500; }
+  
+  .about-media {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .about-img-frame {
+    width: 100%;
+    height: 380px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+  }
+  .about-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
   .about-stats {
     display: grid;
@@ -322,18 +348,20 @@
     gap: 1px;
     background: #2a2a2a;
     border: 1px solid #2a2a2a;
+    border-radius: 4px;
+    overflow: hidden;
   }
   .stat-box {
     background: var(--mid);
-    padding: 40px 32px;
+    padding: 30px 24px;
     text-align: center;
   }
   .stat-number {
     font-family: var(--bebas);
-    font-size: 64px;
+    font-size: 54px;
     line-height: 1;
     color: var(--cobalt);
-    margin-bottom: 8px;
+    margin-bottom: 6px;
   }
   .stat-label {
     font-size: 11px;
@@ -342,14 +370,6 @@
     text-transform: uppercase;
     color: var(--muted);
   }
-  .about-text p {
-    font-size: 15px;
-    color: rgba(240,237,232,0.65);
-    line-height: 1.8;
-    font-weight: 300;
-    margin-bottom: 20px;
-  }
-  .about-text p strong { color: var(--white); font-weight: 500; }
 
   /* PROCESS */
   .process {
@@ -359,84 +379,65 @@
   }
   .process-steps {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 0;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 32px;
     position: relative;
     margin-top: 64px;
   }
-  .process-steps::before {
-    content: '';
-    position: absolute;
-    top: 32px;
-    left: 0; right: 0;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--cobalt), transparent);
-    opacity: 0.3;
-  }
   .step {
-    padding: 0 32px 0 0;
+    padding: 24px;
+    background: var(--dark);
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
     position: relative;
-  }
-  .step-dot {
-    width: 12px; height: 12px;
-    border-radius: 50%;
-    background: var(--cobalt);
-    box-shadow: 0 0 0 4px rgba(26,110,255,0.15);
-    margin-bottom: 28px;
   }
   .step-num {
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 2px;
     color: var(--cobalt);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
+    display: block;
   }
   .step-title {
     font-family: var(--bebas);
-    font-size: 24px;
+    font-size: 26px;
     letter-spacing: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     color: var(--white);
   }
   .step-desc {
     font-size: 13px;
     color: var(--muted);
     line-height: 1.7;
+    font-weight: 300;
   }
 
   /* CTA BAND */
   .cta-band {
-    background: var(--cobalt);
-    padding: 80px 48px;
+    background: linear-gradient(rgba(26,110,255,0.85), rgba(26,110,255,0.95)), url('images/images/hero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding: 100px 48px;
     text-align: center;
     position: relative;
-    overflow: hidden;
-  }
-  .cta-band::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 40px,
-      rgba(255,255,255,0.03) 40px,
-      rgba(255,255,255,0.03) 41px
-    );
   }
   .cta-band h2 {
     font-family: var(--bebas);
-    font-size: clamp(48px, 6vw, 80px);
+    font-size: clamp(44px, 6vw, 76px);
     letter-spacing: 2px;
     margin-bottom: 20px;
-    position: relative;
+    line-height: 1.1;
   }
   .cta-band p {
-    font-size: 15px;
-    opacity: 0.8;
-    margin-bottom: 36px;
+    font-size: 16px;
+    opacity: 0.9;
+    margin-bottom: 40px;
     font-weight: 300;
-    position: relative;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
   }
   .btn-white {
     background: var(--white);
@@ -449,10 +450,9 @@
     text-decoration: none;
     border-radius: 2px;
     display: inline-block;
-    position: relative;
-    transition: transform 0.1s, box-shadow 0.2s;
+    transition: transform 0.2s, box-shadow 0.2s;
   }
-  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+  .btn-white:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
 
   /* CONTACT */
   .contact {
@@ -481,6 +481,8 @@
     justify-content: center;
     font-size: 18px;
     flex-shrink: 0;
+    color: var(--cobalt);
+    background: var(--dark);
   }
   .contact-detail strong {
     display: block;
@@ -492,7 +494,7 @@
     margin-bottom: 4px;
   }
   .contact-detail span {
-    font-size: 15px;
+    font-size: 16px;
     color: var(--white);
     font-weight: 300;
   }
@@ -511,7 +513,7 @@
     transition: border-color 0.2s;
     width: 100%;
   }
-  .form-input::placeholder, .form-textarea::placeholder { color: #444; }
+  .form-input::placeholder, .form-textarea::placeholder { color: #555; }
   .form-input:focus, .form-textarea:focus { border-color: var(--cobalt); }
   .form-textarea { resize: vertical; min-height: 120px; }
   .form-submit {
@@ -551,22 +553,24 @@
   .footer-logo span { color: var(--cobalt); }
   .footer-copy {
     font-size: 12px;
-    color: #444;
+    color: #555;
     font-weight: 300;
-    text-align: center;
   }
-  .footer-social { display: flex; gap: 16px; }
+  .footer-social { display: flex; gap: 12px; }
   .social-link {
-    width: 36px; height: 36px;
+    width: 38px; height: 38px;
     border: 1px solid #222;
     border-radius: 2px;
     display: flex; align-items: center; justify-content: center;
     color: var(--muted);
     text-decoration: none;
-    font-size: 14px;
-    transition: border-color 0.2s, color 0.2s;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: border-color 0.2s, color 0.2s, background 0.2s;
+    background: #0a0a0a;
   }
-  .social-link:hover { border-color: var(--cobalt); color: var(--cobalt); }
+  .social-link:hover { border-color: var(--cobalt); color: var(--white); background: var(--cobalt); }
 
   .nav-hamburger {
     display: none;
@@ -587,14 +591,17 @@
 
   @media (max-width: 768px) {
     nav { padding: 18px 24px; }
+    nav.scrolled { padding: 12px 24px; }
     .nav-links { display: none; }
-    .nav-cta { display: none; }
     .nav-hamburger { display: flex; }
     .hero-content { padding: 0 24px 60px; }
     .services { padding: 80px 24px; }
+    .services-grid { grid-template-columns: 1fr; gap: 24px; }
     .about { padding: 80px 24px; }
     .about-inner { grid-template-columns: 1fr; gap: 48px; }
+    .about-img-frame { height: 280px; }
     .process { padding: 80px 24px; }
+    .process-steps { grid-template-columns: 1fr; gap: 16px; }
     .contact { padding: 80px 24px; }
     .contact-grid { grid-template-columns: 1fr; gap: 48px; }
     .form-row { grid-template-columns: 1fr; }
@@ -609,7 +616,10 @@
 <body>
 
 <nav id="navbar">
-  <a href="#" class="nav-logo">ISUR<span>Events</span></a>
+  <a href="#" class="nav-logo-container">
+    <img src="images/images/logo.jpg" alt="ISUREvents Logo" class="nav-logo-img">
+    <div class="nav-logo">ISUR<span>Events</span></div>
+  </a>
   <ul class="nav-links">
     <li><a href="#services">Services</a></li>
     <li><a href="#about">About</a></li>
@@ -622,7 +632,7 @@
 </nav>
 
 <section class="hero">
-  <div class="hero-stage"></div>
+  <img src="images/images/hero.jpg" alt="Live Event Stage production" class="hero-img-bg">
   <div class="beam beam-1"></div>
   <div class="beam beam-2"></div>
   <div class="beam beam-3"></div>
@@ -634,7 +644,7 @@
       <span>EXORBITANT</span><br>
       <span class="line-gold">EVENTS</span>
     </h1>
-    <p class="hero-sub">World-class sound, stage, and lighting for every occasion — from intimate gatherings to large-scale productions.</p>
+    <p class="hero-sub">World-class sound, stage, and lighting for every occasion — from intimate live worship recordings to large-scale gospel concerts and corporate productions.</p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Book Your Event</a>
       <a href="#services" class="btn-outline">Our Services</a>
@@ -664,24 +674,40 @@
   <h2 class="section-title reveal">Our Services</h2>
   <div class="services-grid reveal">
     <div class="service-card">
-      <span class="service-icon">🎤</span>
-      <div class="service-name">Events</div>
-      <p class="service-desc">Full-scale event production from concept to execution. Corporate launches, awards ceremonies, concerts, and beyond.</p>
+      <div class="service-img-wrapper">
+        <img src="images/images/event.jpg" alt="Event management showcase" class="service-img">
+      </div>
+      <div class="service-body">
+        <div class="service-name">Events</div>
+        <p class="service-desc">Full-scale event management and execution. From regional community assemblies to powerful live production setups that capture every moment perfectly.</p>
+      </div>
     </div>
     <div class="service-card">
-      <span class="service-icon">🔊</span>
-      <div class="service-name">Sound</div>
-      <p class="service-desc">Crystal-clear audio engineering and premium sound systems. We ensure every word and note lands with impact.</p>
+      <div class="service-img-wrapper">
+        <img src="images/images/speaker.jpg" alt="Premium Audio setup" class="service-img">
+      </div>
+      <div class="service-body">
+        <div class="service-name">Sound</div>
+        <p class="service-desc">Crystal-clear audio engineering and elite sound reinforcement. We configure and manage high-caliber audio so that every word, instrument, and lyric lands with impact.</p>
+      </div>
     </div>
     <div class="service-card">
-      <span class="service-icon">🎭</span>
-      <div class="service-name">Stage</div>
-      <p class="service-desc">Custom stage design and construction. From intimate platforms to main-stage builds that command attention.</p>
+      <div class="service-img-wrapper">
+        <img src="images/images/stage setup.jpg" alt="Stage construction" class="service-img">
+      </div>
+      <div class="service-body">
+        <div class="service-name">Stage</div>
+        <p class="service-desc">Professional stage structural design and setup. Engineered carefully to support massive choirs, vocal ensembles, ministries, and high-energy live performance environments safely.</p>
+      </div>
     </div>
     <div class="service-card">
-      <span class="service-icon">💡</span>
-      <div class="service-name">Lighting</div>
-      <p class="service-desc">Atmospheric lighting design that transforms any venue. Theatrical, ambient, or spectacular — we set the mood.</p>
+      <div class="service-img-wrapper">
+        <img src="images/images/singers.jpg" alt="Stage concert lighting" class="service-img">
+      </div>
+      <div class="service-body">
+        <div class="service-name">Lighting</div>
+        <p class="service-desc">Atmospheric, dynamic lighting rigs designed to complement live sound. Creating immersive environments ranging from deeply reflective ambient settings to magnificent theatrical showstoppers.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -691,28 +717,33 @@
     <div class="about-text reveal">
       <div class="section-label">Who We Are</div>
       <h2 class="section-title" style="margin-bottom: 32px;">Built for the Stage</h2>
-      <p>ISUREvents & Projects is a South African events production company dedicated to delivering <strong>exorbitant quality</strong> at every scale. We bring together expert technicians, creative directors, and production specialists to make your vision a reality.</p>
-      <p>Whether you need a full-scale corporate event, a gospel concert, a community function, or a product launch — our team brings the expertise, equipment, and passion to make it unforgettable.</p>
+      <p>ISUREvents & Projects is a premier South African events production house dedicated to delivering <strong>exorbitant quality</strong> at every tier. We combine top-tier technicians, modern logistics structures, and advanced equipment arrays to scale your project seamlessly.</p>
+      <p>Specializing in full production deployment for large-scale musical assemblies, public showcases, community structures, and specialized recording layouts, we deliver polished outcomes from backend technical architecture directly to the stage floor.</p>
       <div style="margin-top: 36px;">
         <a href="#contact" class="btn-primary">Work With Us</a>
       </div>
     </div>
-    <div class="about-stats reveal">
-      <div class="stat-box">
-        <div class="stat-number">1.7K</div>
-        <div class="stat-label">Followers</div>
+    <div class="about-media reveal">
+      <div class="about-img-frame">
+        <img src="images/images/charls.jpg" alt="Featured Artist and Ministry Profile" class="about-img">
       </div>
-      <div class="stat-box">
-        <div class="stat-number">100+</div>
-        <div class="stat-label">Events</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number">4</div>
-        <div class="stat-label">Core Services</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-number">ZA</div>
-        <div class="stat-label">Based Locally</div>
+      <div class="about-stats">
+        <div class="stat-box">
+          <div class="stat-number">1.7K</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">100+</div>
+          <div class="stat-label">Events Hosted</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">4</div>
+          <div class="stat-label">Core Specialisms</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-number">ZA</div>
+          <div class="stat-label">Proudly Local</div>
+        </div>
       </div>
     </div>
   </div>
@@ -723,35 +754,31 @@
   <h2 class="section-title reveal">From Brief to Stage</h2>
   <div class="process-steps">
     <div class="step reveal">
-      <div class="step-dot"></div>
-      <div class="step-num">Step 01</div>
+      <span class="step-num">Step 01</span>
       <div class="step-title">Consultation</div>
-      <p class="step-desc">Tell us your vision, date, venue, and budget. We listen before we plan.</p>
+      <p class="step-desc">We map your core requirements, target dates, venue capacity parameters, and foundational layout scale to establish project bounds cleanly.</p>
     </div>
     <div class="step reveal">
-      <div class="step-dot"></div>
-      <div class="step-num">Step 02</div>
+      <span class="step-num">Step 02</span>
       <div class="step-title">Proposal</div>
-      <p class="step-desc">We craft a detailed production plan with equipment, crew, and cost breakdown.</p>
+      <p class="step-desc">Our design group structures a deep infrastructure blueprint incorporating your complete equipment profile, crew schedules, and logistics breakdown.</p>
     </div>
     <div class="step reveal">
-      <div class="step-dot"></div>
-      <div class="step-num">Step 03</div>
-      <div class="step-title">Production</div>
-      <p class="step-desc">Our team handles setup, rehearsals, and technical checks before the first guest arrives.</p>
+      <span class="step-num">Step 03</span>
+      <div class="step-title">Production Setup</div>
+      <p class="step-desc">Our engineers assemble the audio channels, stage framework, and light grids, handling end-to-end signal checks and tech rehearsals before launch.</p>
     </div>
     <div class="step reveal">
-      <div class="step-dot"></div>
-      <div class="step-num">Step 04</div>
-      <div class="step-title">Show Time</div>
-      <p class="step-desc">We run the event from front-of-house to backstage, so you can focus on your guests.</p>
+      <span class="step-num">Step 04</span>
+      <div class="step-title">Live Execution</div>
+      <p class="step-desc">We run the full environment from front-of-house tracking to backstage oversight, delivering flawless project experience through teardown.</p>
     </div>
   </div>
 </section>
 
 <div class="cta-band">
   <h2>READY TO PRODUCE SOMETHING EXTRAORDINARY?</h2>
-  <p>Let's talk about your next event. No project is too big or too small.</p>
+  <p>Let's talk about your next project. Bring your timeline and parameters, and let's craft an elite experience together.</p>
   <a href="#contact" class="btn-white">Get a Free Quote</a>
 </div>
 
@@ -794,9 +821,9 @@
         <input type="text" class="form-input" placeholder="Your Name">
         <input type="email" class="form-input" placeholder="Email Address">
       </div>
-      <input type="text" class="form-input" placeholder="Event Type (e.g. Corporate, Concert, Wedding)">
+      <input type="text" class="form-input" placeholder="Event Type (e.g. Corporate, Concert, Live Recording)">
       <input type="text" class="form-input" placeholder="Event Date">
-      <textarea class="form-textarea" placeholder="Tell us about your event..."></textarea>
+      <textarea class="form-textarea" placeholder="Tell us about your event details, size, and location parameters..."></textarea>
       <button class="form-submit">Send Message</button>
     </div>
   </div>
@@ -806,9 +833,9 @@
   <div class="footer-logo">ISUR<span>Events</span></div>
   <div class="footer-copy">© 2026 ISUREvents & Projects · We Produce Exorbitant and Quality Projects</div>
   <div class="footer-social">
-    <a href="#" class="social-link" aria-label="Facebook">f</a>
-    <a href="#" class="social-link" aria-label="Instagram">ig</a>
-    <a href="#" class="social-link" aria-label="WhatsApp">wa</a>
+    <a href="https://facebook.com" target="_blank" class="social-link" aria-label="Facebook">fb</a>
+    <a href="https://instagram.com" target="_blank" class="social-link" aria-label="Instagram">ig</a>
+    <a href="https://wa.me/27622783669" target="_blank" class="social-link" aria-label="WhatsApp">wa</a>
   </div>
 </footer>
 
@@ -829,7 +856,8 @@
   }, { threshold: 0.15 });
   reveals.forEach(el => observer.observe(el));
 
-  document.querySelector('.form-submit').addEventListener('click', function() {
+  document.querySelector('.form-submit').addEventListener('click', function(e) {
+    e.preventDefault();
     this.textContent = '✓ Message Sent!';
     this.style.background = '#16a34a';
     setTimeout(() => {
