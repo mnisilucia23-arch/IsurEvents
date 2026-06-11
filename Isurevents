@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISUREvents & Projects — We Produce Exorbitant Events</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black: #0A0A0A;
+    --dark: #111111;
+    --mid: #1E1E1E;
+    --cobalt: #1A6EFF;
+    --gold: #C8A96E;
+    --white: #F0EDE8;
+    --muted: #888;
+    --bebas: 'Bebas Neue', sans-serif;
+    --inter: 'Inter', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--inter);
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 48px;
+    background: linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%);
+    transition: background 0.3s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,0.97);
+    border-bottom: 1px solid #1a1a1a;
+  }
+  .nav-logo {
+    font-family: var(--bebas);
+    font-size: 28px;
+    letter-spacing: 2px;
+    color: var(--white);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--cobalt); }
+  .nav-links { display: flex; gap: 36px; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--cobalt);
+    color: var(--white) !important;
+    padding: 10px 22px;
+    border-radius: 2px;
+    font-weight: 600 !important;
+  }
+  .nav-cta:hover { background: #0f5ae0; color: var(--white) !important; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 100%, rgba(26,110,255,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 30% 40% at 30% 60%, rgba(200,169,110,0.08) 0%, transparent 60%),
+      linear-gradient(180deg, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.7) 60%, rgba(10,10,10,0.97) 100%);
+    z-index: 1;
+  }
+  .hero-stage {
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 180px,
+        rgba(26,110,255,0.03) 180px,
+        rgba(26,110,255,0.03) 181px
+      ),
+      linear-gradient(180deg, #0d0d14 0%, #0a0a12 100%);
+    z-index: 0;
+  }
+  .beam {
+    position: absolute;
+    bottom: 0;
+    width: 3px;
+    height: 75%;
+    transform-origin: bottom center;
+    z-index: 0;
+    opacity: 0.15;
+    animation: sweep 8s ease-in-out infinite;
+  }
+  .beam-1 { left: 20%; background: linear-gradient(to top, var(--cobalt), transparent); animation-delay: 0s; transform: rotate(-25deg); }
+  .beam-2 { left: 50%; background: linear-gradient(to top, var(--gold), transparent); animation-delay: 2s; transform: rotate(0deg); opacity: 0.1; }
+  .beam-3 { left: 80%; background: linear-gradient(to top, var(--cobalt), transparent); animation-delay: 4s; transform: rotate(20deg); }
+  @keyframes sweep {
+    0%, 100% { opacity: 0.12; transform: rotate(var(--r, -25deg)); }
+    50% { opacity: 0.22; transform: rotate(calc(var(--r, -25deg) + 10deg)); }
+  }
+  .beam-1 { --r: -25deg; }
+  .beam-3 { --r: 20deg; }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 48px 80px;
+    max-width: 900px;
+  }
+  .hero-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cobalt);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 32px;
+    height: 1px;
+    background: var(--cobalt);
+  }
+  .hero-headline {
+    font-family: var(--bebas);
+    font-size: clamp(72px, 10vw, 140px);
+    line-height: 0.92;
+    letter-spacing: 2px;
+    margin-bottom: 28px;
+  }
+  .hero-headline .line-gold { color: var(--gold); }
+  .hero-headline .line-dim { color: rgba(240,237,232,0.35); }
+  .hero-sub {
+    font-size: 15px;
+    color: rgba(240,237,232,0.55);
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    max-width: 480px;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--cobalt);
+    color: var(--white);
+    padding: 14px 32px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: background 0.2s, transform 0.1s;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #0f5ae0; transform: translateY(-1px); }
+  .btn-outline {
+    border: 1px solid rgba(240,237,232,0.2);
+    color: var(--white);
+    padding: 14px 32px;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    transition: border-color 0.2s, background 0.2s;
+    display: inline-block;
+  }
+  .btn-outline:hover { border-color: var(--white); background: rgba(240,237,232,0.05); }
+
+  /* TICKER */
+  .ticker {
+    background: var(--cobalt);
+    padding: 12px 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    animation: ticker 20s linear infinite;
+    gap: 0;
+  }
+  .ticker-item {
+    font-family: var(--bebas);
+    font-size: 16px;
+    letter-spacing: 3px;
+    padding: 0 48px;
+    color: rgba(255,255,255,0.9);
+  }
+  .ticker-item::after { content: '✦'; margin-left: 48px; opacity: 0.5; }
+  @keyframes ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* SERVICES */
+  .services {
+    padding: 120px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .section-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--cobalt);
+    margin-bottom: 16px;
+  }
+  .section-title {
+    font-family: var(--bebas);
+    font-size: clamp(42px, 5vw, 72px);
+    line-height: 1;
+    margin-bottom: 64px;
+    color: var(--white);
+  }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: #1a1a1a;
+    border: 1px solid #1a1a1a;
+  }
+  .service-card {
+    background: var(--dark);
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s;
+  }
+  .service-card:hover { background: #141414; }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--cobalt);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-icon {
+    font-size: 32px;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .service-name {
+    font-family: var(--bebas);
+    font-size: 32px;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    color: var(--white);
+  }
+  .service-desc {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ABOUT */
+  .about {
+    padding: 120px 48px;
+    background: var(--mid);
+    position: relative;
+    overflow: hidden;
+  }
+  .about::before {
+    content: 'ISUR';
+    position: absolute;
+    right: -40px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: var(--bebas);
+    font-size: 280px;
+    color: rgba(26,110,255,0.04);
+    letter-spacing: -10px;
+    pointer-events: none;
+    user-select: none;
+  }
+  .about-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .about-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: #2a2a2a;
+    border: 1px solid #2a2a2a;
+  }
+  .stat-box {
+    background: var(--mid);
+    padding: 40px 32px;
+    text-align: center;
+  }
+  .stat-number {
+    font-family: var(--bebas);
+    font-size: 64px;
+    line-height: 1;
+    color: var(--cobalt);
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .about-text p {
+    font-size: 15px;
+    color: rgba(240,237,232,0.65);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 20px;
+  }
+  .about-text p strong { color: var(--white); font-weight: 500; }
+
+  /* PROCESS */
+  .process {
+    padding: 120px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0;
+    position: relative;
+    margin-top: 64px;
+  }
+  .process-steps::before {
+    content: '';
+    position: absolute;
+    top: 32px;
+    left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--cobalt), transparent);
+    opacity: 0.3;
+  }
+  .step {
+    padding: 0 32px 0 0;
+    position: relative;
+  }
+  .step-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    background: var(--cobalt);
+    box-shadow: 0 0 0 4px rgba(26,110,255,0.15);
+    margin-bottom: 28px;
+  }
+  .step-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--cobalt);
+    margin-bottom: 10px;
+  }
+  .step-title {
+    font-family: var(--bebas);
+    font-size: 24px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    color: var(--white);
+  }
+  .step-desc {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* CTA BAND */
+  .cta-band {
+    background: var(--cobalt);
+    padding: 80px 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-band::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 40px,
+      rgba(255,255,255,0.03) 40px,
+      rgba(255,255,255,0.03) 41px
+    );
+  }
+  .cta-band h2 {
+    font-family: var(--bebas);
+    font-size: clamp(48px, 6vw, 80px);
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+  .cta-band p {
+    font-size: 15px;
+    opacity: 0.8;
+    margin-bottom: 36px;
+    font-weight: 300;
+    position: relative;
+  }
+  .btn-white {
+    background: var(--white);
+    color: var(--cobalt);
+    padding: 16px 40px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 2px;
+    display: inline-block;
+    position: relative;
+    transition: transform 0.1s, box-shadow 0.2s;
+  }
+  .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,0,0,0.3); }
+
+  /* CONTACT */
+  .contact {
+    padding: 120px 48px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    margin-top: 64px;
+  }
+  .contact-info-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 36px;
+  }
+  .contact-icon {
+    width: 44px; height: 44px;
+    border: 1px solid #2a2a2a;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+  }
+  .contact-detail strong {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .contact-detail span {
+    font-size: 15px;
+    color: var(--white);
+    font-weight: 300;
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .form-input, .form-textarea {
+    background: #111;
+    border: 1px solid #222;
+    color: var(--white);
+    padding: 14px 18px;
+    font-family: var(--inter);
+    font-size: 14px;
+    font-weight: 300;
+    border-radius: 2px;
+    outline: none;
+    transition: border-color 0.2s;
+    width: 100%;
+  }
+  .form-input::placeholder, .form-textarea::placeholder { color: #444; }
+  .form-input:focus, .form-textarea:focus { border-color: var(--cobalt); }
+  .form-textarea { resize: vertical; min-height: 120px; }
+  .form-submit {
+    background: var(--cobalt);
+    color: var(--white);
+    border: none;
+    padding: 14px 32px;
+    font-family: var(--inter);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+    align-self: flex-start;
+  }
+  .form-submit:hover { background: #0f5ae0; }
+
+  /* FOOTER */
+  footer {
+    background: #050505;
+    padding: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    border-top: 1px solid #111;
+  }
+  .footer-logo {
+    font-family: var(--bebas);
+    font-size: 26px;
+    letter-spacing: 2px;
+    color: var(--white);
+  }
+  .footer-logo span { color: var(--cobalt); }
+  .footer-copy {
+    font-size: 12px;
+    color: #444;
+    font-weight: 300;
+    text-align: center;
+  }
+  .footer-social { display: flex; gap: 16px; }
+  .social-link {
+    width: 36px; height: 36px;
+    border: 1px solid #222;
+    border-radius: 2px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 14px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .social-link:hover { border-color: var(--cobalt); color: var(--cobalt); }
+
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 4px;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 1.5px;
+    background: var(--white);
+    transition: 0.2s;
+  }
+
+  @media (max-width: 768px) {
+    nav { padding: 18px 24px; }
+    .nav-links { display: none; }
+    .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    .hero-content { padding: 0 24px 60px; }
+    .services { padding: 80px 24px; }
+    .about { padding: 80px 24px; }
+    .about-inner { grid-template-columns: 1fr; gap: 48px; }
+    .process { padding: 80px 24px; }
+    .contact { padding: 80px 24px; }
+    .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+    .form-row { grid-template-columns: 1fr; }
+    footer { padding: 32px 24px; flex-direction: column; text-align: center; }
+    .cta-band { padding: 60px 24px; }
+  }
+
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s, transform 0.6s; }
+  .reveal.visible { opacity: 1; transform: none; }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="#" class="nav-logo">ISUR<span>Events</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#contact" class="nav-cta">Get a Quote</a></li>
+  </ul>
+  <button class="nav-hamburger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<section class="hero">
+  <div class="hero-stage"></div>
+  <div class="beam beam-1"></div>
+  <div class="beam beam-2"></div>
+  <div class="beam beam-3"></div>
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Events Production Company · South Africa</div>
+    <h1 class="hero-headline">
+      <span class="line-dim">WE PRODUCE</span><br>
+      <span>EXORBITANT</span><br>
+      <span class="line-gold">EVENTS</span>
+    </h1>
+    <p class="hero-sub">World-class sound, stage, and lighting for every occasion — from intimate gatherings to large-scale productions.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Book Your Event</a>
+      <a href="#services" class="btn-outline">Our Services</a>
+    </div>
+  </div>
+</section>
+
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">EVENTS</span>
+    <span class="ticker-item">SOUND</span>
+    <span class="ticker-item">STAGE</span>
+    <span class="ticker-item">LIGHTING</span>
+    <span class="ticker-item">PRODUCTION</span>
+    <span class="ticker-item">PROJECTS</span>
+    <span class="ticker-item">EVENTS</span>
+    <span class="ticker-item">SOUND</span>
+    <span class="ticker-item">STAGE</span>
+    <span class="ticker-item">LIGHTING</span>
+    <span class="ticker-item">PRODUCTION</span>
+    <span class="ticker-item">PROJECTS</span>
+  </div>
+</div>
+
+<section class="services" id="services">
+  <div class="section-label reveal">What We Do</div>
+  <h2 class="section-title reveal">Our Services</h2>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <span class="service-icon">🎤</span>
+      <div class="service-name">Events</div>
+      <p class="service-desc">Full-scale event production from concept to execution. Corporate launches, awards ceremonies, concerts, and beyond.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🔊</span>
+      <div class="service-name">Sound</div>
+      <p class="service-desc">Crystal-clear audio engineering and premium sound systems. We ensure every word and note lands with impact.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">🎭</span>
+      <div class="service-name">Stage</div>
+      <p class="service-desc">Custom stage design and construction. From intimate platforms to main-stage builds that command attention.</p>
+    </div>
+    <div class="service-card">
+      <span class="service-icon">💡</span>
+      <div class="service-name">Lighting</div>
+      <p class="service-desc">Atmospheric lighting design that transforms any venue. Theatrical, ambient, or spectacular — we set the mood.</p>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="about-inner">
+    <div class="about-text reveal">
+      <div class="section-label">Who We Are</div>
+      <h2 class="section-title" style="margin-bottom: 32px;">Built for the Stage</h2>
+      <p>ISUREvents & Projects is a South African events production company dedicated to delivering <strong>exorbitant quality</strong> at every scale. We bring together expert technicians, creative directors, and production specialists to make your vision a reality.</p>
+      <p>Whether you need a full-scale corporate event, a gospel concert, a community function, or a product launch — our team brings the expertise, equipment, and passion to make it unforgettable.</p>
+      <div style="margin-top: 36px;">
+        <a href="#contact" class="btn-primary">Work With Us</a>
+      </div>
+    </div>
+    <div class="about-stats reveal">
+      <div class="stat-box">
+        <div class="stat-number">1.7K</div>
+        <div class="stat-label">Followers</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Events</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">4</div>
+        <div class="stat-label">Core Services</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">ZA</div>
+        <div class="stat-label">Based Locally</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="section-label reveal">How It Works</div>
+  <h2 class="section-title reveal">From Brief to Stage</h2>
+  <div class="process-steps">
+    <div class="step reveal">
+      <div class="step-dot"></div>
+      <div class="step-num">Step 01</div>
+      <div class="step-title">Consultation</div>
+      <p class="step-desc">Tell us your vision, date, venue, and budget. We listen before we plan.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-dot"></div>
+      <div class="step-num">Step 02</div>
+      <div class="step-title">Proposal</div>
+      <p class="step-desc">We craft a detailed production plan with equipment, crew, and cost breakdown.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-dot"></div>
+      <div class="step-num">Step 03</div>
+      <div class="step-title">Production</div>
+      <p class="step-desc">Our team handles setup, rehearsals, and technical checks before the first guest arrives.</p>
+    </div>
+    <div class="step reveal">
+      <div class="step-dot"></div>
+      <div class="step-num">Step 04</div>
+      <div class="step-title">Show Time</div>
+      <p class="step-desc">We run the event from front-of-house to backstage, so you can focus on your guests.</p>
+    </div>
+  </div>
+</section>
+
+<div class="cta-band">
+  <h2>READY TO PRODUCE SOMETHING EXTRAORDINARY?</h2>
+  <p>Let's talk about your next event. No project is too big or too small.</p>
+  <a href="#contact" class="btn-white">Get a Free Quote</a>
+</div>
+
+<section class="contact" id="contact">
+  <div class="section-label reveal">Get in Touch</div>
+  <h2 class="section-title reveal">Let's Make It Happen</h2>
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="contact-info-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-detail">
+          <strong>Phone</strong>
+          <span>062 278 3669</span>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">📧</div>
+        <div class="contact-detail">
+          <strong>Email</strong>
+          <span>isurevents@gmail.com</span>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-detail">
+          <strong>Location</strong>
+          <span>South Africa</span>
+        </div>
+      </div>
+      <div class="contact-info-item">
+        <div class="contact-icon">📘</div>
+        <div class="contact-detail">
+          <strong>Facebook</strong>
+          <span>@ISUREvents</span>
+        </div>
+      </div>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <input type="text" class="form-input" placeholder="Your Name">
+        <input type="email" class="form-input" placeholder="Email Address">
+      </div>
+      <input type="text" class="form-input" placeholder="Event Type (e.g. Corporate, Concert, Wedding)">
+      <input type="text" class="form-input" placeholder="Event Date">
+      <textarea class="form-textarea" placeholder="Tell us about your event..."></textarea>
+      <button class="form-submit">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">ISUR<span>Events</span></div>
+  <div class="footer-copy">© 2026 ISUREvents & Projects · We Produce Exorbitant and Quality Projects</div>
+  <div class="footer-social">
+    <a href="#" class="social-link" aria-label="Facebook">f</a>
+    <a href="#" class="social-link" aria-label="Instagram">ig</a>
+    <a href="#" class="social-link" aria-label="WhatsApp">wa</a>
+  </div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  reveals.forEach(el => observer.observe(el));
+
+  document.querySelector('.form-submit').addEventListener('click', function() {
+    this.textContent = '✓ Message Sent!';
+    this.style.background = '#16a34a';
+    setTimeout(() => {
+      this.textContent = 'Send Message';
+      this.style.background = '';
+    }, 3000);
+  });
+</script>
+</body>
+</html>
